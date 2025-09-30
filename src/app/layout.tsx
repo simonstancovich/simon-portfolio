@@ -29,10 +29,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header className="flex justify-between items-center py-4 px-4">
-          <h1 className="text-xl font-bold">Simon Stancovich</h1>
+          <h1 className="text-xl font-bold ">Simon Stancovich</h1>
           <nav>
             <Link href="/" className="px-3 py-2 hover:underline">
-              Homer
+              Home
             </Link>
             <Link href="/projects" className="px-3 py-2 hover:underline">
               Projects
