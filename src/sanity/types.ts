@@ -1,3 +1,4 @@
+import { PortableTextBlock } from "next-sanity";
 import type { Image } from "sanity";
 
 export type Profile = {
@@ -9,7 +10,7 @@ export type Profile = {
   cvUrl?: string;
   location?: string;
   avatar?: Image;
-  bio?: any;
+  bio?: PortableTextBlock[];
 };
 
 export type Project = {
