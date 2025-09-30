@@ -31,7 +31,7 @@ export default function RootLayout({
           <h1 className="text-xl font-bold">Simon Stancovich</h1>
           <nav>
             <a href="/" className="px-3 py-2 hover:underline">
-              Home
+              Homer
             </a>
             <a href="/projects" className="px-3 py-2 hover:underline">
               Projects
