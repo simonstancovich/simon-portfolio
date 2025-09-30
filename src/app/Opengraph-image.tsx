@@ -1,9 +1,11 @@
 import { ImageResponse } from "next/og";
 
+export const runtime = "edge";
+export const alt = "Simon Stancovich – Fullstack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OpengraphImage() {
+export default function OpengraphImage() {
   return new ImageResponse(
     (
       <div
@@ -31,6 +33,6 @@ export default async function OpengraphImage() {
         </div>
       </div>
     ),
-    { ...size }
+    size
   );
 }
