@@ -5,7 +5,6 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { PROJECTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { Project } from "@/sanity/types";
-import ContactStrip from "@/components/contact-strip/Contact-strip";
 
 export default async function HomePage() {
   const projects = await sanityFetch<Project[]>({
@@ -17,7 +16,6 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <ContactStrip />
       {/* Projects preview */}
       <section className="max-w-6xl mx-auto px-6 pb-24">
         <h2 className="text-xl font-semibold mb-6">Featured work</h2>
