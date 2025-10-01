@@ -32,7 +32,6 @@ export default async function AboutPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16 space-y-14">
-      {/* Heading */}
       <header>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight">About</h1>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
@@ -41,14 +40,12 @@ export default async function AboutPage() {
         </p>
       </header>
 
-      {/* Bio */}
       {profile?.bio && (
         <section className="prose prose-slate dark:prose-invert max-w-none">
           <PortableText value={profile.bio} />
         </section>
       )}
 
-      {/* Experience timeline */}
       <section aria-label="Experience">
         <h2 className="text-xl font-semibold mb-4">Experience</h2>
         <ol className="relative border-s border-slate-200/60 dark:border-white/10">
@@ -94,7 +91,6 @@ export default async function AboutPage() {
         </ol>
       </section>
 
-      {/* Skills (from your projects) */}
       {techs?.length ? (
         <section aria-label="Skills">
           <h2 className="text-xl font-semibold mb-4">Core skills</h2>
