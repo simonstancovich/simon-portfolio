@@ -109,18 +109,34 @@ export default async function Hero() {
               )}
             </div>
 
-            {/* small tech strip (optional; keep concise) */}
             <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-              {["React", "TypeScript", "Next.js", "Node", "PostgreSQL"].map(
-                (t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-slate-300/50 dark:border-white/10 px-2 py-1"
-                  >
-                    {t}
-                  </span>
-                )
-              )}
+              {[
+                "React",
+                "React Native",
+                "Vue.js",
+                "TypeScript",
+                "Next.js",
+                "Node",
+                "PostgreSQL",
+                "Nest.js",
+                "Firebase",
+                "AWS",
+                "GCP",
+                "Tailwind CSS",
+                "Styled Components",
+                "Prisma",
+                "Sanity",
+                "Strapi",
+                "GraphQL",
+                "Docker",
+              ].map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-slate-300/50 dark:border-white/10 px-2 py-1"
+                >
+                  {t}
+                </span>
+              ))}
             </div>
           </div>
         </div>

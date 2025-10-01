@@ -33,6 +33,13 @@ export default defineType({
     defineField({ name: "liveUrl", title: "Live URL", type: "url" }),
     defineField({ name: "featured", type: "boolean" }),
     defineField({ name: "order", title: "Manual order", type: "number" }),
+    defineField({
+      name: "body",
+      title: "Case study",
+      type: "array",
+      of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
+    }),
   ],
+
   preview: { select: { title: "title", media: "cover" } },
 });

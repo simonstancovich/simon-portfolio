@@ -25,3 +25,15 @@ export type Project = {
   featured?: boolean;
   order?: number;
 };
+
+export type Experience = {
+  _id: string;
+  role: string;
+  company: string;
+  location?: string;
+  start: string;
+  end?: string;
+  summary?: string;
+  highlights?: string[];
+  tech?: string[];
+};
