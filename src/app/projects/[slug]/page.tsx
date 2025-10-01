@@ -8,7 +8,7 @@ import type { Project } from "@/sanity/types";
 
 const PROJECT_BY_SLUG = groq /* groq */ `
 *[_type == "project" && slug.current == $slug][0]{
-  _id, title, "slug": slug.current, description, cover, tech, repoUrl, liveUrl
+  _id, title, "slug": slug.current, description, cover, tech, repoUrl, liveUrl, body
 }
 `;
 
@@ -17,11 +17,12 @@ export const revalidate = 60;
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const project = await sanityFetch<Project | null>({
     query: PROJECT_BY_SLUG,
-    params,
+    params: { slug },
     revalidate,
   });
   if (!project) return { title: "Project not found" };
@@ -47,11 +48,13 @@ export async function generateMetadata({
 export default async function ProjectPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
+
   const project = await sanityFetch<Project | null>({
     query: PROJECT_BY_SLUG,
-    params,
+    params: { slug },
     revalidate,
   });
   if (!project) notFound();
