@@ -11,9 +11,11 @@ export const revalidate = 60;
 export default async function ProjectsPage({
   searchParams,
 }: {
-  searchParams: { tech?: string };
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const tech = searchParams?.tech ?? "";
+  const sp = await searchParams;
+  const tech = Array.isArray(sp.tech) ? (sp.tech[0] ?? "") : (sp.tech ?? "");
+
   const [allTechs, projects] = await Promise.all([
     sanityFetch<string[]>({ query: TECHS_QUERY, revalidate }),
     sanityFetch<Project[]>({
