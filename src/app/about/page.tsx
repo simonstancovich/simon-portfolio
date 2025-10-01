@@ -44,7 +44,7 @@ export default async function AboutPage() {
       {/* Bio */}
       {profile?.bio && (
         <section className="prose prose-slate dark:prose-invert max-w-none">
-          <PortableText value={profile.bio as any} />
+          <PortableText value={profile.bio} />
         </section>
       )}
 
