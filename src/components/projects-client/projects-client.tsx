@@ -90,7 +90,7 @@ export default function ProjectsClient({
                 </div>
                 <div className="mt-4 flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
                   {p.liveUrl && (
-                    <span className="underline underline-offset-4">Live</span>
+                    <span className="underline underline-offset-4">Link</span>
                   )}
                   {p.repoUrl && (
                     <span className="underline underline-offset-4">Code</span>
