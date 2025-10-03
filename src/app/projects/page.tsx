@@ -26,8 +26,6 @@ export default async function ProjectsPage({
     }),
   ]);
 
-  console.log("ProjectsPage ~ tech", tech, projects);
-
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
       <header className="mb-6 flex items-end justify-between gap-4">
