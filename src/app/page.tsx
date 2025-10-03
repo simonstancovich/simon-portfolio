@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/hero/hero";
 import { sanityFetch } from "@/sanity/lib/client";
-import { PROJECTS_QUERY } from "@/sanity/lib/queries";
+import { FEATURED_PROJECTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { Project } from "@/sanity/types";
 
 export default async function HomePage() {
   const projects = await sanityFetch<Project[]>({
-    query: PROJECTS_QUERY,
+    query: FEATURED_PROJECTS_QUERY,
     tags: ["project"],
     revalidate: 60,
   });
@@ -21,9 +21,10 @@ export default async function HomePage() {
         <h2 className="text-xl font-semibold mb-6">Featured work</h2>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects?.map((p) => (
-            <li
+            <Link
+              href={`/projects/${p.slug}`}
               key={p._id}
-              className="group rounded-2xl border border-slate-300/40 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur p-4 hover:shadow-lg transition"
+              className="group rounded-2xl border border-slate-300/40 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur p-4 hover:shadow-lg transition hover:-translate-y-1   hover:border-slate-300/80 dark:hover:border-white/30"
             >
               {p.cover && (
                 <div className="mb-3 overflow-hidden rounded-xl aspect-[16/10]">
@@ -56,27 +57,7 @@ export default async function HomePage() {
                   </span>
                 ))}
               </div>
-              <div className="mt-4 flex items-center gap-3 text-sm">
-                {p.liveUrl && (
-                  <Link
-                    className="underline underline-offset-4"
-                    href={p.liveUrl}
-                    target="_blank"
-                  >
-                    Live
-                  </Link>
-                )}
-                {p.repoUrl && (
-                  <Link
-                    className="underline underline-offset-4"
-                    href={p.repoUrl}
-                    target="_blank"
-                  >
-                    Code
-                  </Link>
-                )}
-              </div>
-            </li>
+            </Link>
           ))}
         </ul>
       </section>
