@@ -18,9 +18,15 @@ array::unique(*[_type=="project" && defined(tech)].tech[]) | order(^ asc)
 
 export const PROJECTS_FILTERED_QUERY = groq /* groq */ `
 *[_type=="project" && (
-  !defined($tech) || $tech == "" || $tech in tech
+  !defined($tech) || $tech == "" || $tech in coalesce(tech, [])
 )]
 | order(defined(order) desc, featured desc, _updatedAt desc){
+  _id, title, "slug": slug.current, description, cover, tech, repoUrl, liveUrl, featured, order
+}
+`;
+
+export const FEATURED_PROJECTS_QUERY = groq /* groq */ `
+*[_type=="project" && featured==true] | order(defined(order) desc, _updatedAt desc){
   _id, title, "slug": slug.current, description, cover, tech, repoUrl, liveUrl, featured, order
 }
 `;
