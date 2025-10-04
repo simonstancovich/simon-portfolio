@@ -1,7 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/client";
 import { PROJECTS_FILTERED_QUERY, TECHS_QUERY } from "@/sanity/lib/queries";
 import type { Project } from "@/sanity/types";
-import ProjectsClient from "@/components/projects-client/projects-client";
+import ProjectsClient from "@/app/projects/_components/projects-client";
 
 export const revalidate = 60;
 
