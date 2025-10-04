@@ -1,4 +1,3 @@
-// src/components/hero.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/client";
@@ -20,14 +19,12 @@ export default async function Hero() {
 
   return (
     <header className="relative overflow-hidden">
-      {/* soft background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-24 -left-24 size-[28rem] rounded-full blur-3xl opacity-30 bg-gradient-to-br from-indigo-400/40 to-sky-300/40 dark:from-indigo-500/20 dark:to-sky-400/20" />
         <div className="absolute -bottom-16 -right-16 size-[24rem] rounded-full blur-3xl opacity-30 bg-gradient-to-tr from-fuchsia-400/30 to-rose-300/30 dark:from-fuchsia-500/15 dark:to-rose-400/15" />
       </div>
 
       <div className="max-w-6xl mx-auto px-6 pt-16 pb-10 md:pt-20 md:pb-16">
-        {/* availability pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-300/50 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur px-3 py-1 text-xs md:text-sm">
           <span className="inline-block size-2.5 rounded-full bg-emerald-500" />
           <span>Open to new opportunities</span>
@@ -35,7 +32,7 @@ export default async function Hero() {
 
         <div className="mt-6 md:mt-8 grid md:grid-cols-[auto,1fr] items-center gap-6 md:gap-10">
           {p?.avatar && (
-            <div className="hidden md:block">
+            <div className="">
               <div className="relative size-28 overflow-hidden rounded-full ring-2 ring-slate-300/60 dark:ring-white/10">
                 <Image
                   src={urlFor(p.avatar)
@@ -57,8 +54,8 @@ export default async function Hero() {
             </h1>
 
             <p className="mt-3 text-lg md:text-xl text-slate-700 dark:text-slate-300">
-              {role} • React / TypeScript / Next.js • Clean architecture, DX &
-              performance.
+              {role} • React / React Native / TypeScript / Next.js / Nest.js •
+              Clean architecture, DX & performance.
             </p>
 
             <ul className="mt-5 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-300">
@@ -119,6 +116,7 @@ export default async function Hero() {
                 "Node",
                 "PostgreSQL",
                 "Nest.js",
+                ".NET",
                 "Firebase",
                 "AWS",
                 "GCP",
