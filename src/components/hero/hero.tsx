@@ -6,17 +6,45 @@ import type { Profile } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 
 export default async function Hero() {
-  const p = await sanityFetch<Profile>({
+  const profile = await sanityFetch<Profile | null>({
     query: PROFILE_QUERY,
     tags: ["profile"],
     revalidate: 60,
   });
 
-  const name = p?.name ?? "Your Name";
-  const role = p?.role ?? "Fullstack Developer";
-  const email = p?.email;
-  const cv = p?.cvUrl;
-  const github = p?.github;
+  const name = profile?.name ?? "Your Name";
+  const role = profile?.role ?? "Fullstack Developer";
+  const email = profile?.email;
+  const cv = profile?.cvUrl;
+  const github = profile?.github;
+
+  const VALUE_POINTS = [
+    "Ship fast with quality",
+    "Strong UI + system design",
+    "Production-ready code & tests",
+  ] as const;
+
+  const TECHS = [
+    "React",
+    "React Native",
+    "Vue.js",
+    "TypeScript",
+    "Next.js",
+    "Node",
+    "PostgreSQL",
+    "Nest.js",
+    ".NET",
+    "Firebase",
+    "AWS",
+    "GCP",
+    "Tailwind CSS",
+    "Styled Components",
+    "Prisma",
+    "Sanity",
+    "Strapi",
+    "GraphQL",
+    "Docker",
+  ] as const;
 
   return (
     <header className="relative overflow-hidden">
@@ -32,11 +60,11 @@ export default async function Hero() {
         </div>
 
         <div className="mt-6 md:mt-8 grid md:grid-cols-[auto,1fr] items-center gap-6 md:gap-10">
-          {p?.avatar && (
+          {profile?.avatar && (
             <div className="">
               <div className="relative size-28 overflow-hidden rounded-full ring-2 ring-slate-300/60 dark:ring-white/10">
                 <Image
-                  src={urlFor(p.avatar)
+                  src={urlFor(profile.avatar)
                     .width(224)
                     .height(224)
                     .fit("crop")
@@ -44,6 +72,8 @@ export default async function Hero() {
                   alt={name}
                   width={112}
                   height={112}
+                  sizes="(min-width: 768px) 112px, 96px"
+                  priority
                 />
               </div>
             </div>
@@ -60,17 +90,13 @@ export default async function Hero() {
             </p>
 
             <ul className="mt-5 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-300">
-              {[
-                "Ship fast with quality",
-                "Strong UI + system design",
-                "Production-ready code & tests",
-              ].map((p) => (
+              {VALUE_POINTS.map((points) => (
                 <li
-                  key={p}
+                  key={points}
                   className="inline-flex items-center gap-2 rounded-full border border-slate-300/50 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur px-3 py-1"
                 >
                   <span aria-hidden>✓</span>
-                  <span>{p}</span>
+                  <span>{points}</span>
                 </li>
               ))}
             </ul>
@@ -86,7 +112,7 @@ export default async function Hero() {
 
               {email && (
                 <Link
-                  href={`mailto:${email}?subject=Hi%20Simon%20—%20Opportunity`}
+                  href={`mailto:${email}?subject=${encodeURIComponent(`Hi ${name} — Opportunity`)}`}
                   className="inline-flex h-10 items-center justify-center rounded-lg px-4 text-sm font-medium
                              border border-slate-300/60 dark:border-white/15 bg-white/70 dark:bg-white/5 backdrop-blur
                              hover:bg-slate-100/70 dark:hover:bg-white/10 active:scale-[.99] transition"
@@ -112,33 +138,13 @@ export default async function Hero() {
                   rel="noopener noreferrer"
                   className="text-sm underline underline-offset-4 hover:opacity-90"
                 >
-                  Github
+                  GitHub
                 </Link>
               )}
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-              {[
-                "React",
-                "React Native",
-                "Vue.js",
-                "TypeScript",
-                "Next.js",
-                "Node",
-                "PostgreSQL",
-                "Nest.js",
-                ".NET",
-                "Firebase",
-                "AWS",
-                "GCP",
-                "Tailwind CSS",
-                "Styled Components",
-                "Prisma",
-                "Sanity",
-                "Strapi",
-                "GraphQL",
-                "Docker",
-              ].map((t) => (
+              {TECHS.map((t) => (
                 <span
                   key={t}
                   className="rounded-full border border-slate-300/50 dark:border-white/10 px-2 py-1"
