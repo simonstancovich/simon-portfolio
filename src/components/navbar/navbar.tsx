@@ -36,7 +36,7 @@ function NavLink({
           "relative inline-block w-fit",
           "after:pointer-events-none after:absolute after:left-0 after:-bottom-1 md:after:bottom-0",
           "after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current",
-          "after:transition-transform after:duration-200",
+          "after:transition-transform after:duration-200 motion-reduce:after:transition-none",
           isActive ? "after:scale-x-100" : "group-hover:after:scale-x-100",
         ].join(" ")}
       >
@@ -52,7 +52,19 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -60,7 +72,6 @@ export default function Navbar() {
     };
   }, [open]);
 
-  // Tiny scroll shadow for separation
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 2);
     onScroll();
@@ -73,11 +84,19 @@ export default function Navbar() {
       aria-label="Primary"
       className={[
         "sticky top-0 z-50 backdrop-blur transition-shadow",
+        "bg-white/60 dark:bg-black/30",
         scrolled
           ? "border-b border-slate-200/60 dark:border-white/10 shadow-[0_1px_0_0_rgba(0,0,0,0.03)]"
           : "",
       ].join(" ")}
     >
+      <a
+        href="#content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]
+                   focus:rounded-md focus:bg-black/80 focus:text-white focus:px-3 focus:py-2"
+      >
+        Skip to content
+      </a>
       <div className="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between">
         <Link
           href="/"
@@ -138,7 +157,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile overlay menu */}
       {open && (
         <div
           id="mobile-menu"
@@ -146,11 +164,13 @@ export default function Navbar() {
           onClick={() => setOpen(false)}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Main menu"
             className="mx-4 mt-20 rounded-md border border-slate-200/60 dark:border-white/10 bg-white/80 dark:bg-black/95 p-2 animate-in-scale motion-reduce:animate-none"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col">
-              {/* Keep Home here for orientation on mobile */}
               <NavLink
                 href="/"
                 onClick={() => setOpen(false)}
