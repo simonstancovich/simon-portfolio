@@ -16,6 +16,7 @@ export default async function Hero() {
   const role = p?.role ?? "Fullstack Developer";
   const email = p?.email;
   const cv = p?.cvUrl;
+  const github = p?.github;
 
   return (
     <header className="relative overflow-hidden">
@@ -102,6 +103,16 @@ export default async function Hero() {
                   className="text-sm underline underline-offset-4 hover:opacity-90"
                 >
                   Download CV
+                </Link>
+              )}
+              {github && (
+                <Link
+                  href={github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm underline underline-offset-4 hover:opacity-90"
+                >
+                  Github
                 </Link>
               )}
             </div>
